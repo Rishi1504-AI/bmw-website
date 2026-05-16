@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMW | Innovation & Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+      .tech-hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to bottom, #050505, #000);
+        padding: 0 60px;
+        text-align: center;
+      }
+      
+      .tech-title {
+        font-size: 100px;
+        font-weight: 200;
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      
+      .tech-subtitle {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        color: var(--bmw-blue);
+        margin-bottom: 40px;
+        opacity: 0;
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+        background-color: rgba(255,255,255,0.1);
+      }
+
+      .tech-card {
+        height: 80vh;
+        background-color: #000;
+        padding: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tech-card h3 {
+        font-size: 40px;
+        font-weight: 300;
+        margin-bottom: 20px;
+      }
+
+      .tech-card p {
+        font-size: 18px;
+        font-weight: 300;
+        color: var(--text-muted);
+        max-width: 400px;
+        line-height: 1.8;
+      }
+
+      .tech-image-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.6; /* Increased visibility */
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensure image covers the card without stretching */
+        transition: transform 1s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.5s ease;
+      }
+
+      .tech-card:hover .tech-image-bg {
+        transform: scale(1.1);
+        opacity: 0.9;
+      }
+
+      .tech-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (max-width: 1024px) {
+        .tech-grid { grid-template-columns: 1fr; }
+        .tech-title { font-size: 60px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tech-app">
+      <div class="custom-cursor"></div>
+      <div class="cursor-follower"></div>
+
+      <header class="top-nav">
+        <div class="nav-left">
+          <a href="/">Home</a>
+          <a href="/models.html">Models</a>
+        </div>
+        <div class="nav-center">
+          <img src="/images/bmw_logo.webp" alt="BMW Logo" class="bmw-logo" />
+        </div>
+        <div class="nav-right">
+          <a href="#">Innovation</a>
+          <a href="#">Electric</a>
+        </div>
+      </header>
+
+      <section class="tech-hero">
+        <h2 class="tech-subtitle">Driving the Future</h2>
+        <h1 class="tech-title">Innovation <br>& Tech</h1>
+      </section>
+
+      <section class="tech-grid">
+        <div class="tech-card">
+          <img src="/images/gemini_generated_image_n2dth1n2dth1n2dt.webp" class="tech-image-bg" />
+          <div class="tech-content">
+            <h3>BMW iDrive</h3>
+            <p>A new era of interaction. Seamlessly blending physical and digital worlds for an intuitive cockpit experience.</p>
+          </div>
+        </div>
+        <div class="tech-card">
+          <img src="/images/gemini_generated_image_639kn8639kn8639k.webp" class="tech-image-bg" />
+          <div class="tech-content">
+            <h3>Electric Soul</h3>
+            <p>BMW eDrive technology delivers instant torque and zero emissions without compromising the joy of driving.</p>
+          </div>
+        </div>
+        <div class="tech-card">
+          <img src="/images/gemini_generated_image_dydnledydnledydn.webp" class="tech-image-bg" />
+          <div class="tech-content">
+            <h3>Vision Next</h3>
+            <p>Pioneering autonomous systems that enhance safety while keeping you at the heart of the experience.</p>
+          </div>
+        </div>
+        <div class="tech-card">
+          <img src="/images/gemini_generated_image_gj1bk8gj1bk8gj1b.webp" class="tech-image-bg" />
+          <div class="tech-content">
+            <h3>Sustainable Luxury</h3>
+            <p>From recycled materials to green energy production—luxury that respects the planet.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-bottom">
+          <div class="footer-logo">
+            <img src="/images/bmw_logo.webp" alt="BMW" />
+            BMW
+          </div>
+          <div class="copyright">© 2026 BMW INNOVATION</div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module">
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Entrance Anims
+      gsap.to('.tech-title', { opacity: 1, y: 0, duration: 1.5, ease: 'power4.out', delay: 0.5 });
+      gsap.to('.tech-subtitle', { opacity: 1, duration: 1, delay: 1 });
+
+      // Cursor Logic (Reused)
+      const cursor = document.querySelector('.custom-cursor');
+      const follower = document.querySelector('.cursor-follower');
+      document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 });
+        gsap.to(follower, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.3 });
+      });
+
+      // Reveal cards on scroll
+      document.querySelectorAll('.tech-card').forEach(card => {
+        gsap.from(card.querySelector('.tech-content'), {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%'
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,401 @@
+:root {
+  --bg-dark: #050505;
+  --text-light: #ffffff;
+  --text-muted: #aaaaaa;
+  --bmw-blue: #0066b1;
+  --font-main: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none; /* Hide default cursor for custom one */
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease-out;
+}
+
+.cursor-follower {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.3s ease-out;
+}
+
+.hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* Typography & Utilities */
+h1, h2, h3 { font-weight: 300; }
+p { line-height: 1.6; }
+
+.cta-button {
+  display: inline-block;
+  padding: 16px 45px;
+  border: 1px solid var(--text-light);
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  opacity: 0;
+}
+
+/* Models Showcase Section */
+.models-showcase-container {
+  position: relative;
+  width: 100vw;
+  background-color: var(--bg-dark);
+}
+
+.model-card {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.model-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.model-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.model-link:hover .model-image {
+  transform: scale(1.05);
+}
+
+.model-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 40%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 80px;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.model-link:hover .model-overlay {
+  opacity: 1;
+}
+
+.model-overlay span {
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 15px 40px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.model-link:hover .model-overlay span {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Right Video */
+.hero-right {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* Top Navigation */
+.top-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 100;
+  pointer-events: none; /* Let clicks pass through if needed, though links need it */
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 40px;
+  pointer-events: auto;
+}
+
+.nav-left a, .nav-right a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-left a::after, .nav-right a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--text-light);
+  transition: width 0.3s ease;
+}
+
+.nav-left a:hover::after, .nav-right a:hover::after {
+  width: 100%;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.bmw-logo {
+  width: 60px;
+  height: auto;
+  /* Screen mix-blend-mode effectively removes a black background from the image,
+     and helps it blend with the background behind it. If the image has a white
+     background, multiply works better. Since the hero video is dark, we assume
+     screen or color-dodge works best to leave the logo floating without bg. */
+  mix-blend-mode: screen;
+  filter: brightness(1.2) contrast(1.2);
+}
+
+/* Performance Section */
+.performance-section {
+  padding: 150px 60px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+  max-width: 1200px;
+  margin-top: 80px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-number {
+  font-size: 80px;
+  font-weight: 200;
+  letter-spacing: -2px;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+}
+
+.brand-quote {
+  margin-top: 150px;
+  font-size: 42px;
+  font-weight: 200;
+  letter-spacing: 15px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .performance-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .stat-number { font-size: 60px; }
+  .brand-quote { font-size: 24px; letter-spacing: 8px; }
+}
+
+/* Footer Styles */
+.site-footer {
+  background-color: #000;
+  color: var(--text-light);
+  padding: 100px 60px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-main);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-col h4 {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: var(--text-muted);
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 15px;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  transition: color 0.3s ease;
+  opacity: 0.7;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  color: var(--bmw-blue);
+}
+
+.footer-bottom {
+  margin-top: 100px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.footer-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.copyright {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.social-links {
+  display: flex;
+  gap: 30px;
+}
+
+.social-links a {
+  color: var(--text-light);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.social-links a:hover {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .site-footer {
+    padding: 60px 30px 30px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+}
+
