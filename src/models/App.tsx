@@ -270,8 +270,8 @@ export default function App() {
             let zIndex = 10;
 
             if (isActive) {
-              x = 0;
-              y = 0;
+              x = windowSize.width > 768 ? windowSize.width * 0.15 : 0;
+              y = 50;
               scale = 1;
               opacity = 1;
               zIndex = 30;
@@ -291,13 +291,10 @@ export default function App() {
             return (
               <motion.div
                 key={car.id}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                onDragEnd={handleDragEnd}
                 animate={{ x, y, scale, opacity }}
                 transition={{ type: 'spring', damping: 25, stiffness: 120, mass: 1.2 }}
                 style={{ zIndex }}
-                className={`absolute w-[1000px] h-[600px] flex items-center justify-center ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                className={`absolute w-[150vw] md:w-[1400px] h-[80vh] md:h-[900px] flex items-center justify-center ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}
               >
               <div className="relative w-full h-full flex items-center justify-center">
                 <model-viewer
